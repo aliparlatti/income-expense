@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { Tab2Page } from './tab2.page';
+import { ExpensesPage } from './expenses.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab2Page,
+    component: ExpensesPage,
   },
 ];
 

@@ -1,5 +1,8 @@
 {
-  "name": "ionic-angular-tailwindcss-starter",
+  "name": "income-expense",
   "type": "angular",
-  "npmClient": "pnpm"
+  "npmClient": "pnpm",
+  "integrations": {
+    "capacitor": {}
+  }
 }
