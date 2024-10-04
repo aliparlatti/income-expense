@@ -18,6 +18,7 @@ export default tsEslint.config(
     ],
     processor: ngEslint.processInlineTemplates,
     rules: {
+      "@typescript-eslint/no-inferrable-types": "off",
       '@angular-eslint/component-class-suffix': [
         'error',
         {
