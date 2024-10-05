@@ -5,7 +5,7 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
-  IonIcon, IonMenu, IonMenuButton,
+  IonIcon, IonItem, IonLabel, IonList, IonMenu, IonMenuButton,
   IonTitle,
   IonToolbar
 } from "@ionic/angular/standalone";
@@ -27,6 +27,9 @@ import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
     NgIf,
     IonMenu,
     IonMenuButton,
+    IonList,
+    IonLabel,
+    IonItem,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -37,7 +40,7 @@ export class HeaderComponent {
   title = 'Income & Expense';
   noBackButtonRoutes: string[] = ['/tabs/incomes/list', '/tabs/dashboard', '/tabs/expenses/list'];
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(protected router: Router, private route: ActivatedRoute) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const currentRoute = this.router.url;
