@@ -2,7 +2,7 @@
   <ion-item>
     <ion-select label="selectCategory" label-placement="floating" interface="popover"
                 (ionChange)="changeCategory($event)">
-      <ion-icon class="bg-lime-600 p-1 rounded-full" *ngIf="selectedCategory" slot="start"
+      <ion-icon class="dark:bg-lime-100 dark:text-slate-800 text-white bg-lime-600 p-1 rounded-full" *ngIf="selectedCategory" slot="start"
                 [name]="selectedCategory.icon" aria-hidden="true"></ion-icon>
       <ion-select-option *ngFor="let category of categories$ | async" [value]="category">
         {{ category.name }}
