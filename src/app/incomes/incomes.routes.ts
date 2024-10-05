@@ -10,16 +10,18 @@ const routes: Routes = [
     children: [
       {
         path: 'add',
-        component: AddIncomeComponent
+        component: AddIncomeComponent,
+        title:'Incomes',
       },
       {
         path: 'list',
-        component: IncomeListComponent
+        component: IncomeListComponent,
+        title:'Incomes',
       },
       {
         path: '',
         redirectTo: '/tabs/incomes/list',
-        pathMatch: 'full',
+        pathMatch: 'full'
       },
     ]
   },

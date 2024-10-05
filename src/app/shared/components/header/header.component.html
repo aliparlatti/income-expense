@@ -1,26 +1,41 @@
-  <ion-menu contentId="main-content" type="overlay">
+  <ion-menu contentId="main-content" type="overlay" menuId="main">
     <ion-header>
-      <ion-toolbar color="primary">
+      <ion-toolbar color="secondary">
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item button="true" (click)="router.navigate(['/settings'])">
+        <ion-menu-toggle auto-hide="true">
+        <ion-item button="true" (click)="goToPage('/settings')">
+          <ion-icon class="mr-2" name="settings"></ion-icon>
           <ion-label>settings</ion-label>
         </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="true">
         <ion-item button="true">
           <ion-label>Mega Man X</ion-label>
         </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="true">
         <ion-item button="true">
           <ion-label>The Legend of Zelda</ion-label>
         </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="true">
         <ion-item button="true">
           <ion-label>Pac-Man</ion-label>
         </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="true">
         <ion-item button="true">
           <ion-label>Super Mario World</ion-label>
         </ion-item>
+        </ion-menu-toggle>
       </ion-list>
     </ion-content>
   </ion-menu>
