@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import { User } from "../models/user.model";
 import { Storage } from "@ionic/storage-angular";
+import {ToastrService} from "./toastr.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AuthService {
   constructor(
     private supabaseService: SupabaseService,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private toastr:ToastrService
   ) {
   }
 
@@ -37,8 +39,8 @@ export class AuthService {
         await this.storage.set('refresh_token', refresh_token);
 
         this.user$.next(new User(user?.user_metadata));
-
         this.router.navigateByUrl('/tabs/dashboard');
+        await this.toastr.showToast('success', 'Logged ' + this.user$.value?.name,['z-50','-my-12'])
       }
     } catch (error) {
       console.error('Google login error:', error);

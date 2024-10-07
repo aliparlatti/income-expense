@@ -14,7 +14,7 @@ import {logoGoogle} from "ionicons/icons";
     IonLabel,
     NgIf,
     IonContent,
-    IonIcon
+    IonIcon,
   ],
   templateUrl: './sign-in.component.html',
   styles: ``

@@ -15,7 +15,7 @@ import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {filter, map} from 'rxjs/operators';
 import {Subject, takeUntil} from "rxjs";
 import {addIcons} from "ionicons";
-import {logOutOutline, settings} from "ionicons/icons";
+import {help, logOutOutline, settings} from "ionicons/icons";
 import {AuthService} from "../../services/auth.service";
 
 @Component({
@@ -53,7 +53,7 @@ export class HeaderComponent implements OnDestroy{
   showHeader: boolean=true;
 
   constructor(protected router: Router, private route: ActivatedRoute,protected authService:AuthService) {
-    addIcons({settings,logOutOutline})
+    addIcons({settings,logOutOutline,help})
     this.router.events
       .pipe(
         takeUntil(this._unsubscribeAll),

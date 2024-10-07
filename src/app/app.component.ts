@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IonApp, IonRouterOutlet} from '@ionic/angular/standalone';
+import {IonApp, IonRouterOutlet, IonToast} from '@ionic/angular/standalone';
 import {HeaderComponent} from "./shared/components/header/header.component";
 import {Storage} from "@ionic/storage-angular";
 import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
@@ -9,7 +9,7 @@ import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
   templateUrl: 'app.component.html',
   standalone: true,
   imports: [
-    IonApp, IonRouterOutlet, HeaderComponent,
+    IonApp, IonRouterOutlet, HeaderComponent, IonToast,
   ],
 })
 export class AppComponent implements  OnInit{
