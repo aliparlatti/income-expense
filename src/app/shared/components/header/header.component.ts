@@ -17,6 +17,7 @@ import {Subject, takeUntil} from "rxjs";
 import {addIcons} from "ionicons";
 import {help, logOutOutline, settings} from "ionicons/icons";
 import {AuthService} from "../../services/auth.service";
+import {TranslocoPipe} from "@ngneat/transloco";
 
 @Component({
   selector: 'app-header',
@@ -40,6 +41,7 @@ import {AuthService} from "../../services/auth.service";
     IonAvatar,
     AsyncPipe,
     IonChip,
+    TranslocoPipe,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

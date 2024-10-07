@@ -1,8 +1,27 @@
 <ion-content>
-  <ion-list-header>Appearance</ion-list-header>
+  <ion-list-header>{{ 'appearance' | transloco }}</ion-list-header>
   <ion-list>
     <ion-item>
-      <ion-toggle [(ngModel)]="themeToggle" (ionChange)="toggleChange($event)" justify="space-between">Dark Mode</ion-toggle>
+      <ion-toggle [(ngModel)]="themeToggle" (ionChange)="toggleChange($event)"
+                  justify="space-between">{{ 'darkMode' | transloco }}
+      </ion-toggle>
+    </ion-item>
+  </ion-list>
+  <ion-list-header>{{ 'system' | transloco }}</ion-list-header>
+  <ion-list>
+    <ion-item>
+      <div class="flex flex-row w-full items-center justify-between">
+        <ion-label>{{ 'language' | transloco }}</ion-label>
+        <div class="flex flex-row gap-3">
+          <div *ngFor="let lang of availableLangs" (click)="setActiveLang(lang['id'])">
+            <img
+              [ngClass]="lang['id']===activeLang? 'border-lime-400 border-2':''"
+              class="w-10 p-1 rounded-md"
+              [src]="'assets/images/flags/' + lang['id'].toUpperCase() + '.svg'"
+              [alt]="'Flag image for ' + lang">
+          </div>
+        </div>
+      </div>
     </ion-item>
   </ion-list>
 </ion-content>
