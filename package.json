@@ -45,6 +45,7 @@
     "@angular/cli": "^18.2.5",
     "@angular/compiler-cli": "^18.2.5",
     "@angular/language-service": "^18.2.5",
+    "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "6.1.2",
     "@types/node": "^20.16.5",
     "angular-eslint": "^18.3.1",
