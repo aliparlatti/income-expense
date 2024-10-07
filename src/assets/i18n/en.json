@@ -1,0 +1,12 @@
+{
+  "dashboard": "Dashboard",
+  "incomes": "Incomes",
+  "expenses": "Expenses",
+  "settings": "Settings",
+  "help": "Help",
+  "logout": "Logout",
+  "appearance": "Appearance",
+  "darkMode": "Dark Mode",
+  "system": "System",
+  "language": "Language"
+}

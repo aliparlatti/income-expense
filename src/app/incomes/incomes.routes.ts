@@ -11,12 +11,12 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddIncomeComponent,
-        title:'Incomes',
+        title:'incomes',
       },
       {
         path: 'list',
         component: IncomeListComponent,
-        title:'Incomes',
+        title:'incomes',
       },
       {
         path: '',

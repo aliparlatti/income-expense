@@ -10,7 +10,9 @@
     "ng:update-angular-cli": "ng update @angular/cli --force",
     "ng:update-angular-core": "ng update @angular/core --force",
     "ng:update-angular-eslint": "ng update @angular-eslint/schematics --force",
-    "start": "ng serve"
+    "start": "ng serve",
+    "i18n:extract": "transloco-keys-manager extract",
+    "i18n:find": "transloco-keys-manager find"
   },
   "dependencies": {
     "@angular/cdk": "^18.2.7",
@@ -30,6 +32,8 @@
     "@codetrix-studio/capacitor-google-auth": "^3.4.0-rc.4",
     "@ionic/angular": "^8.3.1",
     "@ionic/storage-angular": "^4.0.0",
+    "@jsverse/transloco-keys-manager": "^5.1.0",
+    "@ngneat/transloco": "^6.0.4",
     "@supabase/supabase-js": "^2.45.4",
     "ionicons": "^7.4.0",
     "rxjs": "^7.8.1",

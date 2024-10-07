@@ -20,14 +20,14 @@
            <ion-menu-toggle auto-hide="true">
              <ion-item button="true" (click)="goToPage('/settings')">
                <ion-icon class="mr-2" name="settings"></ion-icon>
-               <ion-label>settings</ion-label>
+               <ion-label>{{ 'settings' | transloco }}</ion-label>
              </ion-item>
            </ion-menu-toggle>
 
            <ion-menu-toggle auto-hide="true">
              <ion-item button="true" (click)="goToPage('/settings')">
                <ion-icon class="mr-2" name="help"></ion-icon>
-               <ion-label>help</ion-label>
+               <ion-label>{{ 'help' | transloco }}</ion-label>
              </ion-item>
            </ion-menu-toggle>
          </ion-list>
@@ -35,7 +35,7 @@
        <ion-menu-toggle auto-hide="true">
          <ion-item button="true" (click)="logout()">
            <ion-icon name="log-out-outline" class="mr-2 text-red-600"></ion-icon>
-           <ion-label>logout</ion-label>
+           <ion-label>{{ 'logout' | transloco }}</ion-label>
          </ion-item>
        </ion-menu-toggle>
      </div>
@@ -52,7 +52,7 @@
         <ion-buttons slot="end">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>{{ title }}</ion-title>
+        <ion-title>{{ title | transloco}}</ion-title>
       </ion-toolbar>
     </ion-header>
 

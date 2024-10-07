@@ -27,7 +27,6 @@ export class AppComponent implements  OnInit{
   }
 
   async initializeApp() {
-    await this.storage.create();
     const savedTheme = await this.storage.get('dark-theme');
     if (savedTheme !== null) {
       document.body.classList.toggle('dark', savedTheme);
