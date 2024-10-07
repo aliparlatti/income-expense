@@ -1,47 +1,50 @@
   <ion-menu contentId="main-content" type="overlay" menuId="main">
     <ion-header>
-      <ion-toolbar color="secondary">
+      <ion-toolbar>
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-list>
-        <ion-menu-toggle auto-hide="true">
-        <ion-item button="true" (click)="goToPage('/settings')">
-          <ion-icon class="mr-2" name="settings"></ion-icon>
-          <ion-label>settings</ion-label>
-        </ion-item>
-        </ion-menu-toggle>
+     <div class="flex flex-col justify-between h-full">
+       <div class="flex flex-col gap-5">
+         <ion-list>
+           <ion-item *ngIf="(authService.user$ | async)" lines="none">
+             <ion-chip>
+               <ion-avatar>
+                 <img  alt="" [src]="(authService.user$ | async)?.picture" />
+               </ion-avatar>
+               <ion-label>{{(authService.user$ | async)?.name}} - {{(authService.user$ | async)?.email}}</ion-label>
+             </ion-chip>
+           </ion-item>
 
-        <ion-menu-toggle auto-hide="true">
-        <ion-item button="true">
-          <ion-label>Mega Man X</ion-label>
-        </ion-item>
-        </ion-menu-toggle>
+           <ion-menu-toggle auto-hide="true">
+             <ion-item button="true" (click)="goToPage('/settings')">
+               <ion-icon class="mr-2" name="settings"></ion-icon>
+               <ion-label>settings</ion-label>
+             </ion-item>
+           </ion-menu-toggle>
 
-        <ion-menu-toggle auto-hide="true">
-        <ion-item button="true">
-          <ion-label>The Legend of Zelda</ion-label>
-        </ion-item>
-        </ion-menu-toggle>
-
-        <ion-menu-toggle auto-hide="true">
-        <ion-item button="true">
-          <ion-label>Pac-Man</ion-label>
-        </ion-item>
-        </ion-menu-toggle>
-
-        <ion-menu-toggle auto-hide="true">
-        <ion-item button="true">
-          <ion-label>Super Mario World</ion-label>
-        </ion-item>
-        </ion-menu-toggle>
-      </ion-list>
+           <ion-menu-toggle auto-hide="true">
+             <ion-item button="true" (click)="goToPage('/settings')">
+               <ion-icon class="mr-2" name="help"></ion-icon>
+               <ion-label>help</ion-label>
+             </ion-item>
+           </ion-menu-toggle>
+         </ion-list>
+       </div>
+       <ion-menu-toggle auto-hide="true">
+         <ion-item button="true" (click)="logout()">
+           <ion-icon name="log-out-outline" class="mr-2 text-red-600"></ion-icon>
+           <ion-label>logout</ion-label>
+         </ion-item>
+       </ion-menu-toggle>
+     </div>
     </ion-content>
+
   </ion-menu>
 
   <div class="ion-page" id="main-content">
-    <ion-header>
+    <ion-header   *ngIf="showHeader">
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-back-button *ngIf="showBackButton" defaultHref="/tabs/dashboard"></ion-back-button>

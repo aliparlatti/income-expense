@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "227419213250",
+    "project_id": "income-expense-437412",
+    "storage_bucket": "income-expense-437412.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227419213250:android:dd6b2db4de0078c0199a5b",
+        "android_client_info": {
+          "package_name": "com.alip.incomeexpense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227419213250-99tf90245rg3ig0u9u0gdh9ku42q4r95.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alip.incomeexpense",
+            "certificate_hash": "de72fa28307c18d067ecf95e61d4f334ac971a1a"
+          }
+        },
+        {
+          "client_id": "227419213250-dug5uf9hpletpv23ch9lhj69er6lbi4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWCNl2C4YpL5lKUYXys1wEUyzhAzpGIz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227419213250-97fun5umc2sp4oeobg0n0pa24rfrc7uk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

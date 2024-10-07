@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">income-expense</string>
     <string name="title_activity_main">income-expense</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">"com.alip.incomeexpense</string>
+    <string name="custom_url_scheme">com.alip.incomeexpense</string>
+    <string name="server_client_id">227419213250-97fun5umc2sp4oeobg0n0pa24rfrc7uk.apps.googleusercontent.com</string>
 </resources>

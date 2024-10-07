@@ -23,4 +23,27 @@ export class SupabaseService {
     }
     return data;
   }
+  async signInWithGoogleIdToken(idToken: string) {
+    const { data, error } = await this.supabase.auth.signInWithIdToken({
+      provider: 'google',
+      token: idToken,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
+  }
+  async refreshAccessToken(refreshToken: string) {
+    const { data, error } = await this.supabase.auth.refreshSession({
+      refresh_token: refreshToken,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
+  }
 }
