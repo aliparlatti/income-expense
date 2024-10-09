@@ -4,7 +4,7 @@
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
+    <ion-content [fullscreen]="true" >
      <div class="flex flex-col justify-between h-full">
        <div class="flex flex-col gap-5">
          <ion-list>
@@ -44,11 +44,8 @@
   </ion-menu>
 
   <div class="ion-page" id="main-content">
-    <ion-header   *ngIf="showHeader">
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-back-button *ngIf="showBackButton" defaultHref="/tabs/dashboard"></ion-back-button>
-        </ion-buttons>
+    <ion-header  *ngIf="showHeader">
+      <ion-toolbar color="primary">
         <ion-buttons slot="end">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>

@@ -1,0 +1,35 @@
+<ion-content style="--padding-bottom: 56px;">
+  <ion-grid class="w-full">
+    <ion-row class="px-2 py-1 dark:bg-gray-800 bg-gray-200 rounded-lg my-2 mx-1" *ngFor="let transaction of transactions$ | async">
+      <div class="flex flex-col w-full">
+        <div class="flex flex-row items-center">
+          <ion-col size="5">
+            <app-date-view [date]="transaction.transaction_date"></app-date-view>
+          </ion-col>
+          <ion-col class=" text-right font-semibold" size="7">{{ transaction.amount | currencyFormat:true }}</ion-col>
+        </div>
+       <div class="flex flex-row border-t border-gray-300">
+         <ion-col size="4" class="flex flex-row items-center justify-center">
+              <ion-icon class="absolute -bottom-1 -left-1 text-3xl z-50 text-primary-800 dark:text-primary-300"
+                        [name]="transaction.category?.icon" aria-hidden="true"></ion-icon>
+           <div class="flex flex-col items-end ">
+             <span class="text-[10px] dark:text-slate-400 text-slate-700 z-20">{{ transaction.category?.name | transloco }}</span>
+           </div>
+         </ion-col>
+         <ion-col size="8" *ngIf="transaction?.notes" >
+           <span class="text-sm ">{{ transaction.notes }}</span>
+         </ion-col>
+       </div>
+      </div>
+
+    </ion-row>
+  </ion-grid>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="mb-12">
+    <ion-fab-button size="small" [routerLink]="['../add']">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

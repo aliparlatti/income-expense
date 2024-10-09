@@ -1,4 +1,5 @@
 export class User {
+  id: string;
   aud: string;
   email: string;
   emailVerified: boolean;
@@ -13,6 +14,7 @@ export class User {
   sub: string;
 
   constructor(userData: any) {
+    this.id = userData.id;
     this.aud = userData.aud;
     this.email = userData.email;
     this.emailVerified = userData.email_verified;

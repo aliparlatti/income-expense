@@ -38,7 +38,7 @@ export class AuthService {
         await this.storage.set('access_token', access_token);
         await this.storage.set('refresh_token', refresh_token);
 
-        this.user$.next(new User(user?.user_metadata));
+        this.user$.next(new User( {...user.user_metadata,id:user.id}))
         this.router.navigateByUrl('/tabs/dashboard');
         await this.toastr.showToast('success', 'Logged ' + this.user$.value?.name,['z-50','-my-12'])
       }
@@ -65,7 +65,7 @@ export class AuthService {
       if (refreshToken) {
         const userData = await this.supabaseService.refreshAccessToken(refreshToken);
         if (userData) {
-          this.user$.next(new User(userData.user.user_metadata))
+          this.user$.next(new User( {...userData.user.user_metadata,id:userData.user.id}))
           const { access_token } = userData.session;
           await this.storage.set('access_token', access_token);
           return true;

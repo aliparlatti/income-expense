@@ -1,0 +1,40 @@
+<form [formGroup]="form">
+  <div class="flex flex-col px-3 py-2 gap-3">
+    <ion-item>
+      <ion-select
+        [label]="'selectCategory'|transloco" label-placement="floating" interface="popover"
+        (ionChange)="changeCategory($event)">
+        <ion-icon class="dark:bg-primary-100 dark:text-slate-800 text-white bg-primary-600 p-1 rounded-full"
+                  *ngIf="selectedCategory" slot="start"
+                  [name]="selectedCategory.icon" aria-hidden="true"></ion-icon>
+        <ion-select-option *ngFor="let category of categories$ | async" [value]="category">
+          {{ category.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        type="tel"
+        [label]="'amount'|transloco"
+        labelPlacement="floating"
+        placeholder="0,00"
+        formControlName="amount"
+        (ionBlur)="onBlur()"
+        (ionFocus)="onFocus()"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea
+        [label]="'notes'|transloco"
+        [autoGrow]="true"
+        labelPlacement="floating"
+        formControlName="notes"
+        [rows]="5"
+      ></ion-textarea>
+    </ion-item>
+    <div class="w-100 flex flex-row justify-end">
+      <ion-button (click)="onSubmit()" size="small" [disabled]="!form.valid" shape="round">{{ 'save'|transloco }}
+      </ion-button>
+    </div>
+  </div>
+</form>

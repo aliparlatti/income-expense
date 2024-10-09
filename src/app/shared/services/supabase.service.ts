@@ -7,22 +7,37 @@ import {environment} from "../../../environments/environment";
   providedIn: 'root',
 })
 export class SupabaseService {
-  private supabase: SupabaseClient;
+  public supabase: SupabaseClient;
   constructor() {
     this.supabase = createClient(
       environment.supabaseUrl,
       environment.supabaseKey
     );
   }
-  protected async getTableData(tableName: string) {
+  protected async getTableData(tableName: string, columns?: string[]) {
     const { data, error } = await this.supabase
       .from(tableName)
-      .select('*');
+      .select(columns?.length ? columns.join(',') : '*');
     if (error) {
       throw new Error(error.message);
     }
     return data;
   }
+
+  protected async insertData(tableName: string, data: any) {
+    const { data: insertedData, error } = await this.supabase
+      .from(tableName)
+      .insert([data]);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    return insertedData;
+  }
+
+
+
+
   async signInWithGoogleIdToken(idToken: string) {
     const { data, error } = await this.supabase.auth.signInWithIdToken({
       provider: 'google',

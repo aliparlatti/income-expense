@@ -48,9 +48,7 @@ import {TranslocoPipe} from "@ngneat/transloco";
 })
 export class HeaderComponent implements OnDestroy{
   _unsubscribeAll: Subject<any> = new Subject<any>()
-  showBackButton = false;
   title = 'Income & Expense';
-  noBackButtonRoutes: string[] = ['/tabs/incomes/list', '/tabs/dashboard', '/tabs/expenses/list'];
   noHeader:string[] = ['/login']
   showHeader: boolean=true;
 
@@ -75,7 +73,6 @@ export class HeaderComponent implements OnDestroy{
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const currentRoute = this.router.url;
-        this.showBackButton = !this.noBackButtonRoutes.includes(currentRoute);
         this.showHeader = !this.noHeader.includes(currentRoute);
       }
     });

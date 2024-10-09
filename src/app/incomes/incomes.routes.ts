@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
 import {IncomesPage} from './incomes.page';
-import {AddIncomeComponent} from "./components/add-income/add-income.component";
-import {IncomeListComponent} from "./components/income-list/income-list.component";
+import {AddTransactionComponent} from "../shared/components/add-income/add-transaction.component";
+import {TransactionListComponent} from "../shared/components/income-list/transaction-list.component";
 
 const routes: Routes = [
   {
@@ -10,13 +10,15 @@ const routes: Routes = [
     children: [
       {
         path: 'add',
-        component: AddIncomeComponent,
+        component: AddTransactionComponent,
         title:'incomes',
+        data: { isIncome: true }
       },
       {
         path: 'list',
-        component: IncomeListComponent,
+        component: TransactionListComponent,
         title:'incomes',
+        data: { isIncome: true }
       },
       {
         path: '',
