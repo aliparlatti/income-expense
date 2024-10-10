@@ -4,11 +4,12 @@ import {CategoryService} from "../../services/category.service";
 import {BehaviorSubject, Subject, takeUntil} from "rxjs";
 import {Category} from "../../models/category.model";
 import {
-  IonButton, IonFab, IonFabButton,
+  IonAccordion, IonAccordionGroup,
+  IonButton, IonDatetime, IonDatetimeButton, IonFab, IonFabButton,
   IonIcon,
   IonInput,
-  IonItem,
-  IonList,
+  IonItem, IonLabel,
+  IonList, IonModal,
   IonSelect,
   IonSelectOption,
   IonTextarea
@@ -46,6 +47,12 @@ import {ActivatedRoute} from "@angular/router";
     IonFab,
     IonFabButton,
     ReactiveFormsModule,
+    IonLabel,
+    IonDatetime,
+    IonDatetimeButton,
+    IonModal,
+    IonAccordion,
+    IonAccordionGroup,
   ],
   templateUrl: './add-transaction.component.html',
   styles: ``
@@ -57,6 +64,7 @@ export class AddTransactionComponent implements OnInit, OnDestroy {
   selectedCategory: Category;
   applyFormat: boolean = true;
   form: FormGroup;
+  date: Date;
 
   constructor(private route:ActivatedRoute,private  toastrService:ToastrService, private transactionService: TransactionService, private autService: AuthService, private categoryService: CategoryService, private fb: FormBuilder, private currencyFormatPipe: CurrencyFormatPipe) {
     addIcons({...icon})
@@ -78,7 +86,7 @@ export class AddTransactionComponent implements OnInit, OnDestroy {
       category_id: [null, Validators.required],
       amount: [null, [Validators.required, Validators.min(0)]],
       notes: [''],
-      transaction_date: [new Date(Date.now())],
+      transaction_date: [new Date().toJSON()],
       is_income: [this.isIncome],
       user_id: [this.autService.user$.value?.id]
     });

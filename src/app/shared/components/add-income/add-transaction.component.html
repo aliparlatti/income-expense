@@ -8,7 +8,7 @@
                   *ngIf="selectedCategory" slot="start"
                   [name]="selectedCategory.icon" aria-hidden="true"></ion-icon>
         <ion-select-option *ngFor="let category of categories$ | async" [value]="category">
-          {{ category.name }}
+          {{ category.name | transloco }}
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -32,6 +32,25 @@
         [rows]="5"
       ></ion-textarea>
     </ion-item>
+    <ion-accordion-group [readonly]="false">
+      <ion-accordion value="first">
+        <ion-item slot="header" color="light">
+          <ion-label>{{ 'extraInfo' | transloco }}</ion-label>
+        </ion-item>
+        <div class="" slot="content">
+          <ion-item>
+            <ion-label>{{ 'date' | transloco }}</ion-label>
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime formControlName="transaction_date" id="datetime"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
     <div class="w-100 flex flex-row justify-end">
       <ion-button (click)="onSubmit()" size="small" [disabled]="!form.valid" shape="round">{{ 'save'|transloco }}
       </ion-button>
