@@ -20,6 +20,7 @@ export default tsEslint.config(
     rules: {
       "@typescript-eslint/no-inferrable-types": "off",
       "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/consistent-indexed-object-style": "off",
       '@angular-eslint/component-class-suffix': [
         'error',
         {

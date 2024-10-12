@@ -1,7 +1,7 @@
 <ion-content>
   <ion-list-header>{{ 'appearance' | transloco }}</ion-list-header>
   <ion-list>
-    <ion-item>
+    <ion-item lines="none">
       <ion-toggle [(ngModel)]="themeToggle" (ionChange)="toggleChange($event)"
                   justify="space-between">{{ 'darkMode' | transloco }}
       </ion-toggle>
@@ -9,7 +9,7 @@
   </ion-list>
   <ion-list-header>{{ 'system' | transloco }}</ion-list-header>
   <ion-list>
-    <ion-item>
+    <ion-item lines="none">
       <div class="flex flex-row w-full items-center justify-between">
         <ion-label>{{ 'language' | transloco }}</ion-label>
         <div class="flex flex-row gap-3">

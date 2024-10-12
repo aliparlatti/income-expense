@@ -45,14 +45,14 @@
 
 /* This sets a different background and item background in light mode on ios */
 .ios body {
-  --ion-background-color: #f2f2f6;
+  --ion-background-color: #e1e1e1;
   --ion-toolbar-background: var(--ion-background-color);
   --ion-item-background: #fff;
 }
 
 /* This sets a different background and item background in light mode on md */
 .md body {
-  --ion-background-color: #f9f9f9;
+  --ion-background-color: #e1e1e1;
   --ion-toolbar-background: var(--ion-background-color);
   --ion-item-background: #fff;
   --ion-text-color: #000;

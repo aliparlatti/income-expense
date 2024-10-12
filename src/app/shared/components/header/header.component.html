@@ -5,7 +5,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content [fullscreen]="true" >
-     <div class="flex flex-col justify-between h-full">
+     <div class="flex flex-col justify-between h-full bg-white dark:bg-[#1e1e1e]">
        <div class="flex flex-col gap-5">
          <ion-list>
            <ion-item *ngIf="(authService.user$ | async)" lines="none">
@@ -32,8 +32,8 @@
            </ion-menu-toggle>
          </ion-list>
        </div>
-       <ion-menu-toggle auto-hide="true">
-         <ion-item button="true" (click)="logout()">
+       <ion-menu-toggle  auto-hide="true">
+         <ion-item lines="none" class="border-t border-neutral-400" button="true" (click)="logout()">
            <ion-icon name="log-out-outline" class="mr-2 text-red-600"></ion-icon>
            <ion-label>{{ 'logout' | transloco }}</ion-label>
          </ion-item>

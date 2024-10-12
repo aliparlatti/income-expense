@@ -1,6 +1,5 @@
-
-import { Injectable } from '@angular/core';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import {Injectable} from '@angular/core';
+import {createClient, SupabaseClient} from '@supabase/supabase-js';
 import {environment} from "../../../environments/environment";
 
 @Injectable({
@@ -8,14 +7,16 @@ import {environment} from "../../../environments/environment";
 })
 export class SupabaseService {
   public supabase: SupabaseClient;
+
   constructor() {
     this.supabase = createClient(
       environment.supabaseUrl,
       environment.supabaseKey
     );
   }
+
   protected async getTableData(tableName: string, columns?: string[]) {
-    const { data, error } = await this.supabase
+    const {data, error} = await this.supabase
       .from(tableName)
       .select(columns?.length ? columns.join(',') : '*');
     if (error) {
@@ -24,8 +25,20 @@ export class SupabaseService {
     return data;
   }
 
+  protected async delete(tableName: string, condition: { [key: string]: any }) {
+    const {data: deletedData, error} = await this.supabase
+      .from(tableName)
+      .delete()
+      .match(condition);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    return deletedData;
+  }
+
   protected async insertData(tableName: string, data: any) {
-    const { data: insertedData, error } = await this.supabase
+    const {data: insertedData, error} = await this.supabase
       .from(tableName)
       .insert([data]);
 
@@ -35,11 +48,21 @@ export class SupabaseService {
     return insertedData;
   }
 
+  protected async updateData(tableName: string, data: any, condition: any) {
+    const {data: updatedData, error} = await this.supabase
+      .from(tableName)
+      .update(data)
+      .match(condition);
+    if (error) {
+      throw new Error(error.message);
+    }
 
+    return updatedData;
+  }
 
 
   async signInWithGoogleIdToken(idToken: string) {
-    const { data, error } = await this.supabase.auth.signInWithIdToken({
+    const {data, error} = await this.supabase.auth.signInWithIdToken({
       provider: 'google',
       token: idToken,
     });
@@ -50,8 +73,9 @@ export class SupabaseService {
 
     return data;
   }
+
   async refreshAccessToken(refreshToken: string) {
-    const { data, error } = await this.supabase.auth.refreshSession({
+    const {data, error} = await this.supabase.auth.refreshSession({
       refresh_token: refreshToken,
     });
 

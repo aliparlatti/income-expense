@@ -23,10 +23,11 @@ import {CurrencyFormatPipe} from "../../pipes/currency-format.pipe";
 import {AuthService} from "../../services/auth.service";
 import {TransactionService} from "../../services/transaction.service";
 import {ToastrService} from "../../services/toastr.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Transaction} from "../../models/transaction.model";
 
 @Component({
-  selector: 'app-add-transaction',
+  selector: 'app-manage-transaction',
   standalone: true,
   imports: [
     HeaderComponent,
@@ -54,23 +55,39 @@ import {ActivatedRoute} from "@angular/router";
     IonAccordion,
     IonAccordionGroup,
   ],
-  templateUrl: './add-transaction.component.html',
-  styles: ``
+  templateUrl: './manage-transaction.component.html',
+  styles: [`
+    ion-datetime-button::part(native) {
+      @apply text-white;
+    }
+    @media (prefers-color-scheme: dark) {
+      ion-datetime-button::part(native) {
+        @apply bg-neutral-600;
+      }
+    }
+  `]
 })
-export class AddTransactionComponent implements OnInit, OnDestroy {
+export class ManageTransactionComponent implements OnInit, OnDestroy {
   _unsubscribeAll: Subject<any> = new Subject<any>()
-  isIncome:boolean;
+  isIncome: boolean;
   categories$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([])
   selectedCategory: Category;
   applyFormat: boolean = true;
   form: FormGroup;
   date: Date;
+  transaction: Transaction
 
-  constructor(private route:ActivatedRoute,private  toastrService:ToastrService, private transactionService: TransactionService, private autService: AuthService, private categoryService: CategoryService, private fb: FormBuilder, private currencyFormatPipe: CurrencyFormatPipe) {
+  constructor(private router: Router, private route: ActivatedRoute, private toastrService: ToastrService, private transactionService: TransactionService, private autService: AuthService, private categoryService: CategoryService, private fb: FormBuilder, private currencyFormatPipe: CurrencyFormatPipe) {
     addIcons({...icon})
-    this.route.data.subscribe(data => {
-      this.isIncome = data['isIncome']
-      this.initForm()
+
+    this.route.queryParams.pipe(takeUntil(this._unsubscribeAll)).subscribe(params => {
+      this.route.data.pipe(takeUntil(this._unsubscribeAll)).subscribe(data => {
+        this.isIncome = data['isIncome']
+        if (this.router.getCurrentNavigation()?.extras?.state) {
+          this.transaction = new Transaction((this.router.getCurrentNavigation().extras.state['transaction']));
+        }
+        this.initForm()
+      });
     });
   }
 
@@ -84,12 +101,17 @@ export class AddTransactionComponent implements OnInit, OnDestroy {
   initForm() {
     this.form = this.fb.group({
       category_id: [null, Validators.required],
-      amount: [null, [Validators.required, Validators.min(0)]],
-      notes: [''],
-      transaction_date: [new Date().toJSON()],
+      amount: [this.transaction?.amount || null, [Validators.required, Validators.min(0)]],
+      notes: [this.transaction?.notes || ''],
+      transaction_date: [this.transaction?.transaction_date.toJSON() || new Date().toJSON()],
       is_income: [this.isIncome],
       user_id: [this.autService.user$.value?.id]
     });
+    if (this.transaction?.id) {
+      this.onBlur();
+      this.form.controls['category_id'].patchValue(this.transaction.category.id)
+      this.selectedCategory = this.transaction.category
+    }
   }
 
   ngOnDestroy() {
@@ -131,16 +153,27 @@ export class AddTransactionComponent implements OnInit, OnDestroy {
       } else {
         formData.amount = parseFloat(parts[0]);
       }
-      this.transactionService.addTransaction(formData)
-        .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe(value => {
-          this.form.reset();
-          this.initForm();
-          this.selectedCategory=null;
-          this.toastrService.showToast('success',null,['z-50','-my-12'])
-        }, error => {
-          console.error('Error adding transaction:', error);
-        });
+      if (this.transaction?.id) {
+        this.transactionService.updateTransaction(formData, this.transaction.id)
+          .pipe(takeUntil(this._unsubscribeAll))
+          .subscribe(value => {
+            console.log(value)
+            this.toastrService.showToast('successUpdated', null, ['z-50', '-my-12'])
+          }, error => {
+            console.error('Error adding transaction:', error);
+          });
+      } else {
+        this.transactionService.addTransaction(formData)
+          .pipe(takeUntil(this._unsubscribeAll))
+          .subscribe(value => {
+            this.form.reset();
+            this.initForm();
+            this.selectedCategory = null;
+            this.toastrService.showToast('successAdded', null, ['z-50', '-my-12'])
+          }, error => {
+            console.error('Error adding transaction:', error);
+          });
+      }
     }
   }
 

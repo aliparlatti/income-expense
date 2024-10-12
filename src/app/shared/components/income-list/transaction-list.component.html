@@ -1,27 +1,38 @@
 <ion-content style="--padding-bottom: 56px;">
   <ion-grid class="w-full">
-    <ion-row class="px-2 py-1 dark:bg-gray-800 bg-gray-200 rounded-lg my-2 mx-1" *ngFor="let transaction of transactions$ | async">
-      <div class="flex flex-col w-full">
-        <div class="flex flex-row items-center">
-          <ion-col size="5">
-            <app-date-view [date]="transaction.transaction_date"></app-date-view>
-          </ion-col>
-          <ion-col class=" text-right font-semibold" size="7">{{ transaction.amount | currencyFormat:true }}</ion-col>
-        </div>
-       <div class="flex flex-row border-t border-gray-300">
-         <ion-col size="4" class="flex flex-row items-center justify-center">
-              <ion-icon class="absolute -bottom-1 -left-1 text-3xl z-50 text-primary-800 dark:text-primary-300"
-                        [name]="transaction.category?.icon" aria-hidden="true"></ion-icon>
-           <div class="flex flex-col items-end ">
-             <span class="text-[10px] dark:text-slate-400 text-slate-700 z-20">{{ transaction.category?.name | transloco }}</span>
-           </div>
-         </ion-col>
-         <ion-col size="8" *ngIf="transaction?.notes" >
-           <span class="text-sm ">{{ transaction.notes }}</span>
-         </ion-col>
-       </div>
-      </div>
-
+    <ion-row class="my-3 mx-2" *ngFor="let transaction of transactions$ | async">
+      <ion-item-sliding>
+        <ion-item  class="rounded-lg" lines="none">
+          <div class="flex flex-col w-full">
+            <div class="flex flex-row items-center">
+              <ion-col size="5">
+                <app-date-view [date]="transaction.transaction_date"></app-date-view>
+              </ion-col>
+              <ion-col class=" text-right font-semibold" size="7">{{ transaction.amount | currencyFormat:true }}</ion-col>
+            </div>
+            <div class="flex flex-row border-t border-gray-300 mt-3">
+              <ion-col size="4" class="flex flex-row items-end justify-center">
+                <ion-icon class="absolute bottom-0.5 -left-0 text-3xl z-50 text-primary-800 dark:text-primary-300"
+                          [name]="transaction.category?.icon" aria-hidden="true"></ion-icon>
+                <div class="flex flex-col items-end ">
+                  <span class="text-[10px] dark:text-slate-400 text-slate-700 z-20">{{ (transaction.category?.name | transloco) | truncate:10 }}</span>
+                </div>
+              </ion-col>
+              <ion-col size="8" *ngIf="transaction?.notes" >
+                <span class="text-sm ">{{ transaction.notes }}</span>
+              </ion-col>
+            </div>
+          </div>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="editTransaction(transaction)" class="rounded-l-lg">
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-item-option>
+          <ion-item-option (click)="deleteTransaction(transaction)" class="rounded-r-lg" color="danger">
+            <ion-icon slot="icon-only" name="trash" ></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-row>
   </ion-grid>
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">

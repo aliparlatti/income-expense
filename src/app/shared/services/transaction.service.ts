@@ -16,7 +16,16 @@ export class TransactionService extends SupabaseService {
     return from(this.insertData('transactions', transactionData));
   }
 
-  getTransactions(type: boolean,page:number): Observable<Transaction[]> {
+  updateTransaction(data: Transaction,transactionId:number) {
+    return from(this.updateData('transactions', data, {id: transactionId}))
+  }
+
+
+  deleteTransaction(condition: { [key: string]: any }): Observable<any> {
+    return from(this.delete('transactions', condition));
+  }
+
+  getTransactions(type: boolean, page: number): Observable<Transaction[]> {
     const pageSize = 25;
     return from(this.supabase
       .from('transactions')
@@ -25,8 +34,8 @@ export class TransactionService extends SupabaseService {
       )
       .eq('is_income', type)
       .range((page - 1) * pageSize, page * pageSize - 1)
-      .order('transaction_date', { ascending: false })
-      .then(({ data, error }) => {
+      .order('transaction_date', {ascending: false})
+      .then(({data, error}) => {
         if (error) {
           throw new Error(error.message);
         }

@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="flex flex-col px-3 py-2 gap-3">
-    <ion-item>
-      <ion-select
+    <ion-item lines="none">
+      <ion-select [selectedText]="selectedCategory? (selectedCategory.name | transloco):null"
         [label]="'selectCategory'|transloco" label-placement="floating" interface="popover"
         (ionChange)="changeCategory($event)">
         <ion-icon class="dark:bg-primary-100 dark:text-slate-800 text-white bg-primary-600 p-1 rounded-full"
@@ -12,7 +12,7 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item lines="none">
       <ion-input
         type="tel"
         [label]="'amount'|transloco"
@@ -23,7 +23,7 @@
         (ionFocus)="onFocus()"
       ></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item lines="none">
       <ion-textarea
         [label]="'notes'|transloco"
         [autoGrow]="true"
@@ -34,16 +34,16 @@
     </ion-item>
     <ion-accordion-group [readonly]="false">
       <ion-accordion value="first">
-        <ion-item slot="header" color="light">
+        <ion-item  slot="header" color="light">
           <ion-label>{{ 'extraInfo' | transloco }}</ion-label>
         </ion-item>
         <div class="" slot="content">
-          <ion-item>
+          <ion-item lines="none">
             <ion-label>{{ 'date' | transloco }}</ion-label>
-            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            <ion-datetime-button  datetime="datetime"></ion-datetime-button>
             <ion-modal [keepContentsMounted]="true">
               <ng-template>
-                <ion-datetime formControlName="transaction_date" id="datetime"></ion-datetime>
+                <ion-datetime class="text-slate-100" formControlName="transaction_date" id="datetime"></ion-datetime>
               </ng-template>
             </ion-modal>
           </ion-item>
@@ -52,7 +52,8 @@
     </ion-accordion-group>
 
     <div class="w-100 flex flex-row justify-end">
-      <ion-button (click)="onSubmit()" size="small" [disabled]="!form.valid" shape="round">{{ 'save'|transloco }}
+      <ion-button (click)="onSubmit()" size="small" [disabled]="!form.valid" shape="round">
+        {{ transaction? ('update'| transloco ):('save'|transloco) }}
       </ion-button>
     </div>
   </div>
