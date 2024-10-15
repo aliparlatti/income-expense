@@ -7,6 +7,7 @@ import { IonicStorageModule, Storage } from "@ionic/storage-angular";
 import { provideTransloco, TranslocoService } from '@ngneat/transloco';
 import { TranslocoHttpLoader } from "./shared/services/transloco.http-loader";
 import { firstValueFrom } from "rxjs";
+import {NgApexchartsModule} from "ng-apexcharts";
 
 async function initializeApp(storage: Storage, translocoService: TranslocoService) {
   await storage.create();
@@ -24,7 +25,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
     importProvidersFrom(IonicStorageModule.forRoot()),
-
+    importProvidersFrom(NgApexchartsModule),
     {
       provide: APP_INITIALIZER,
       useFactory: (storage: Storage, translocoService: TranslocoService) => () => initializeApp(storage, translocoService),

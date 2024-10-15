@@ -45,4 +45,19 @@ export class TransactionService extends SupabaseService {
       map(transactions => transactions.map(transaction => new Transaction(transaction)))
     );
   }
+  getCategoryTotal(startDate: string, endDate: string,isIncome:boolean): Observable<any> {
+    return from(this.supabase
+      .rpc('get_category_total', {
+        start_date: startDate,
+        end_date: endDate,
+        is_income:isIncome
+      })
+      .then(({ data, error }) => {
+        if (error) {
+          throw new Error(error.message);
+        }
+        return data;
+      })
+    );
+  }
 }
