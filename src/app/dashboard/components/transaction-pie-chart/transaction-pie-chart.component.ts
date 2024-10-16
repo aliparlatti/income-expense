@@ -91,7 +91,8 @@ export class TransactionPieChartComponent implements OnInit,OnDestroy {
           breakpoint: 800,
           options: {
             chart: {
-              width: 400
+              width: 400,
+              height:350
             },
             legend: {
               show: false
