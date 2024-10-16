@@ -1,0 +1,25 @@
+<div class="flex flex-row pt-4 ">
+  <ion-button [fill]="dateSelector === 'day' ? 'solid' : 'outline'"
+              (click)="dateSelector = 'day'; updateDateRange()" size="small"
+              class="w-full m-0 toggle-button">{{ 'day' | transloco }}
+  </ion-button>
+  <ion-button [fill]="dateSelector === 'week' ? 'solid' : 'outline'"
+              (click)="dateSelector = 'week'; updateDateRange()" size="small"
+              class="w-full m-0 toggle-button">{{ 'week' | transloco }}
+  </ion-button>
+  <ion-button [fill]="dateSelector === 'month' ? 'solid' : 'outline'"
+              (click)="dateSelector = 'month'; updateDateRange()" size="small"
+              class="w-full m-0 toggle-button">{{ 'month' | transloco }}
+  </ion-button>
+  <ion-button [fill]="dateSelector === 'year' ? 'solid' : 'outline'"
+              (click)="dateSelector = 'year'; updateDateRange()" size="small"
+              class="w-full m-0 toggle-button">{{ 'year' | transloco }}
+  </ion-button>
+</div>
+<div class="flex flex-row pt-2 w-full justify-evenly items-center">
+  <ion-icon (click)="previousRange()" class="z-10 text-primary-800"
+            name="chevron-back-outline"></ion-icon>
+  <strong>{{ moment(filterForm.get('startDate')?.value).format('YYYY-MM-DD') + ' - ' + moment(filterForm.get('endDate')?.value).format('YYYY-MM-DD') }}</strong>
+  <ion-icon (click)="nextRange()" class="z-10 text-primary-800"
+            name="chevron-forward-outline"></ion-icon>
+</div>

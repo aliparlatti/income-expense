@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { ExpensesPage } from './expenses.page';
-import {TransactionListComponent} from "../shared/components/income-list/transaction-list.component";
+import {TransactionListComponent} from "../shared/components/transaction-list/transaction-list.component";
 import {ManageTransactionComponent} from "../shared/components/manage-income/manage-transaction.component";
 
 const routes: Routes = [

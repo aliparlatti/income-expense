@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
 import {IncomesPage} from './incomes.page';
 import {ManageTransactionComponent} from "../shared/components/manage-income/manage-transaction.component";
-import {TransactionListComponent} from "../shared/components/income-list/transaction-list.component";
+import {TransactionListComponent} from "../shared/components/transaction-list/transaction-list.component";
 
 const routes: Routes = [
   {
