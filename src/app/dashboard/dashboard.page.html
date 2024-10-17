@@ -5,18 +5,25 @@
     <app-transaction-pie-chart class="mt-4"
                                *ngIf="transactionTotalList$?.value?.length>0"
                                [transactionTotals$]="transactionTotals$"></app-transaction-pie-chart>
-    <div *ngIf="transactionTotalList$?.value?.length<=0" class="flex flex-row justify-center items-center h-[350px]">
-      <span class="text-red-600 font-semibold">{{ 'noDataAvailableToDisplay'|transloco }}</span></div>
+    <div *ngIf="transactionTotalList$?.value?.length<=0" class="flex flex-col justify-center items-center h-[350px]">
+      <ion-icon class="text-primary-600 w-24 h-24 opacity-50"
+                [name]="chartType$.value==='pie'?'pie-chart-outline':'stats-chart-sharp'" size="large"></ion-icon>
+    </div>
   </div>
   <ion-content [scrollEvents]="true">
-    <ion-list>
+    <div  *ngIf="transactionTotalList$?.value?.length<=0"
+      class="flex flex-row justify-center items-center h-full w-full">
+          <span
+            class="text-neutral-600 text-sm font-semibold opacity-80">{{ 'noDataAvailableToDisplay'|transloco }}</span>
+    </div>
+    <ion-list *ngIf="transactionTotalList$?.value?.length>0">
       <ion-item *ngFor="let transaction of transactionTotalList$ | async">
         <div class="flex flex-row justify-between w-full">
           <ion-label>
-            <h2 class="text-neutral-600">{{ transaction.category_name | transloco }}</h2>
+            <h2 class="text-neutral-600 dark:text-neutral-400">{{ transaction.category_name | transloco }}</h2>
           </ion-label>
           <ion-label>
-            <span class="text-slate-800 font-semibold">{{ transaction.total | currencyFormat:true }}</span>
+            <span class="text-neutral-800 dark:text-neutral-400 font-semibold">{{ transaction.total | currencyFormat:true }}</span>
           </ion-label>
         </div>
       </ion-item>
@@ -24,22 +31,36 @@
     <ion-modal #modal trigger="open-modal"
                [backdropBreakpoint]="0.75"
                [backdropDismiss]="false"
-               [initialBreakpoint]="0.25"
-               [breakpoints]="[0,0.25, 0.5, 0.75]">
+               [initialBreakpoint]="0.35"
+               [breakpoints]="[0,0.35, 0.5, 0.75]">
       <ng-template>
         <ion-content class="ion-padding">
-          <div class="bg-neutral-100 h-full">
-            <div class="flex flex-row pt-4 ">
-              <ion-button [fill]="filterForm.get('isIncome').value?'solid':'outline'"
-                          (click)="filterForm.get('isIncome').patchValue(true)"
-                          class="w-full m-0 toggle-button">{{ 'incomes'|transloco }}
+          <div class="bg-neutral-100 h-full flex flex-col gap-4">
+            <div class="flex flex-row pt-4">
+              <ion-button [fill]="chartType$.value==='pie'?'solid':'outline'"
+                          (click)="chartType$.next('pie')"
+                          class="w-full m-0 toggle-button">
+                <ion-icon class="w-14 h-14" name="pie-chart-outline" size="large"></ion-icon>
               </ion-button>
-              <ion-button [fill]="filterForm.get('isIncome').value?'outline':'solid'"
-                          (click)="filterForm.get('isIncome').patchValue(false)"
-                          class="w-full m-0 toggle-button">{{ 'expenses'|transloco }}
+              <ion-button [fill]="chartType$.value==='line'?'solid':'outline'"
+                          (click)="chartType$.next('line')"
+                          class="w-full m-0 toggle-button">
+                <ion-icon class="w-14 h-14" name="stats-chart-sharp" size="large"></ion-icon>
               </ion-button>
             </div>
-            <app-date-range-selector (dateRangeChanged)="onDateRangeChange($event)"></app-date-range-selector>
+            <div class="flex flex-col">
+              <div class="flex flex-row">
+                <ion-button [fill]="filterForm.get('isIncome').value?'solid':'outline'"
+                            (click)="filterForm.get('isIncome').patchValue(true)"
+                            class="w-full m-0 toggle-button">{{ 'incomes'|transloco }}
+                </ion-button>
+                <ion-button [fill]="filterForm.get('isIncome').value?'outline':'solid'"
+                            (click)="filterForm.get('isIncome').patchValue(false)"
+                            class="w-full m-0 toggle-button">{{ 'expenses'|transloco }}
+                </ion-button>
+              </div>
+              <app-date-range-selector (dateRangeChanged)="onDateRangeChange($event)"></app-date-range-selector>
+            </div>
           </div>
         </ion-content>
       </ng-template>

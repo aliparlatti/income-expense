@@ -18,7 +18,7 @@ import {CurrencyFormatPipe} from "../shared/pipes/currency-format.pipe";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {TranslocoPipe} from "@ngneat/transloco";
 import {addIcons} from "ionicons";
-import {filterCircleOutline, chevronBackOutline, chevronForwardOutline} from "ionicons/icons";
+import {filterCircleOutline, chevronBackOutline, chevronForwardOutline,pieChartOutline,statsChartSharp} from "ionicons/icons";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {DateRangeSelectorComponent} from "../shared/components/date-range-selector/date-range-selector.component";
 import moment from 'moment';
@@ -29,6 +29,7 @@ import moment from 'moment';
   styles: `
     .toggle-button {
       --border-radius: 0;
+      --border-width: 1px;
     }
   `,
   imports: [AsyncPipe, IonContent, IonHeader, IonTitle, IonToolbar, TransactionPieChartComponent, IonList, IonLabel, IonItem, CurrencyFormatPipe, NgForOf, TranslocoPipe, IonModal, IonTabButton, IonIcon, IonButton, IonDatetime, DateRangeSelectorComponent, NgIf],
@@ -38,9 +39,9 @@ export class DashboardPage implements OnInit, OnDestroy {
   transactionTotalList$: BehaviorSubject<TransactionTotalModel[]> = new BehaviorSubject<TransactionTotalModel[]>([])
   transactionTotals$: BehaviorSubject<TransactionTotalModel[]> = new BehaviorSubject<TransactionTotalModel[]>([])
   filterForm: FormGroup;
-
+  chartType$: BehaviorSubject<string> = new BehaviorSubject<string>('pie')
   constructor(private transactionService: TransactionService, private fb: FormBuilder) {
-    addIcons({filterCircleOutline, chevronBackOutline, chevronForwardOutline})
+    addIcons({filterCircleOutline, chevronBackOutline, chevronForwardOutline,pieChartOutline,statsChartSharp})
     const today = moment().startOf('day');
     const oneMonthAgo = moment().subtract(1, 'month').startOf('day');
 

@@ -1,4 +1,4 @@
-<div class="flex flex-row pt-4 ">
+<div class="flex flex-row">
   <ion-button [fill]="dateSelector === 'day' ? 'solid' : 'outline'"
               (click)="dateSelector = 'day'; updateDateRange()" size="small"
               class="w-full m-0 toggle-button">{{ 'day' | transloco }}
@@ -19,7 +19,7 @@
 <div class="flex flex-row pt-2 w-full justify-evenly items-center">
   <ion-icon (click)="previousRange()" class="z-10 text-primary-800" size="large"
             name="chevron-back-outline"></ion-icon>
-  <strong>{{ moment(filterForm.get('startDate')?.value).format('YYYY-MM-DD') + ' - ' + moment(filterForm.get('endDate')?.value).format('YYYY-MM-DD') }}</strong>
+  <strong class="dark:text-neutral-800">{{ moment(filterForm.get('startDate')?.value).format('YYYY-MM-DD') + ' - ' + moment(filterForm.get('endDate')?.value).format('YYYY-MM-DD') }}</strong>
   <ion-icon (click)="nextRange()" class="z-10 text-primary-800" size="large"
             name="chevron-forward-outline"></ion-icon>
 </div>

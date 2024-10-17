@@ -108,7 +108,7 @@ export class TransactionPieChartComponent implements OnInit,OnDestroy {
       const labels = value.map((item: { category_name: string }) => item.category_name);
       const series = value.map((item: { total: number }) => item.total);
 
-      this.translocoService.selectTranslateObject(labels).subscribe(translations => {
+      this.translocoService.selectTranslateObject(labels).pipe(takeUntil(this._unsubscribeAll)).subscribe(translations => {
         this.chartOptions = {
           ...this.chartOptions,
           labels: translations,

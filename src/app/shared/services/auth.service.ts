@@ -66,8 +66,9 @@ export class AuthService {
         const userData = await this.supabaseService.refreshAccessToken(refreshToken);
         if (userData) {
           this.user$.next(new User( {...userData.user.user_metadata,id:userData.user.id}))
-          const { access_token } = userData.session;
+          const {access_token,refresh_token}  = userData.session;
           await this.storage.set('access_token', access_token);
+          await this.storage.set('refresh_token', refresh_token);
           return true;
         }
       }

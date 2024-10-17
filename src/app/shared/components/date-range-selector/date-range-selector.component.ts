@@ -12,6 +12,7 @@ import  moment from 'moment';
   styles: [`
     .toggle-button {
       --border-radius: 0;
+      --border-width: 1px;
     }
   `]
 })
@@ -46,7 +47,7 @@ export class DateRangeSelectorComponent implements OnInit {
         end = start.clone().add(1,'days').endOf('day')
         break;
       case 'week':
-        start = this.today.clone().startOf('week');
+        start = this.today.clone().startOf('isoWeek');
         end = start.clone().add(6, 'days');
         break;
       case 'month':
@@ -83,7 +84,7 @@ export class DateRangeSelectorComponent implements OnInit {
         break;
       case 'week':
         newStartDate = currentStartDate.subtract(1, 'week');
-        newEndDate = newStartDate.clone().add(6, 'days');
+        newEndDate = newStartDate.clone().endOf("day").add(6, 'days');
         break;
       case 'month':
         newStartDate = currentStartDate.subtract(1, 'month').startOf('month');
@@ -113,7 +114,7 @@ export class DateRangeSelectorComponent implements OnInit {
         break;
       case 'week':
         newStartDate = currentStartDate.add(1, 'week');
-        newEndDate = newStartDate.clone().add(6, 'days');
+        newEndDate = newStartDate.clone().endOf("day").add(6, 'days');
         break;
       case 'month':
         newStartDate = currentStartDate.add(1, 'month').startOf('month');
